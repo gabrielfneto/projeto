@@ -1,0 +1,53 @@
+saldo = 0
+limite = 500
+numero_saque = 0
+extrato = {}
+num_deposito = 0
+
+while True:
+        #Pedindo a opção que o usuário deseja fazer
+        operacao = input("""Digite qual Operação você deseja fazer:
+                        [1] Depósito
+                        [2] Saque
+                        [3] Extrato
+                        [4] Sair
+                            : """).strip()[0]
+   #se o usuário escolher depósito
+        if operacao == '1':
+            valor = float(input("Digite o valor que deseja depositar: "))
+            num_deposito +=1
+            extrato[f"Deposito{num_deposito}"] = valor
+            saldo += valor
+            print("Operação Realizada")
+    #se o usuário escolher saque
+        elif operacao == '2':
+            numero_saque = numero_saque + 1
+            if numero_saque <= 3:
+                saque = float(input("Qual valor você deseja sacar: "))
+                if saque < saldo and saldo > 0 and saque <=500:
+                    saldo -= saque
+                    extrato[f'Saque{numero_saque}'] = saque
+                    print("Operação Realizada")
+                else:
+                    print('OPERAÇÃO NÃO REALIZADA.')
+                    continue
+            else:
+                print("Você já realizou 3 saques hoje!")
+        #se o usuário escolher extrato
+        elif operacao == '3':
+            print("***************EXTRATO******************")
+            if len(extrato) == 0:
+                print("Não foi realizado nenhuma operação")
+            else:
+                for i, j in extrato.items():
+                     print(f"{i} : R${j}")
+            print(f"Seu Saldo é de R$ {saldo}.")
+            print("****************************************")
+        #se o usuário escolher sair
+        elif operacao == '4':
+            print("Volte Sempre")
+            break
+        #se o usuário não colocar uma opção válida
+        else:
+            print("Você Digitou um Número invalido, digite novamente")
+            continue
